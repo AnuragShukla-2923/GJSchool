@@ -32,12 +32,45 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/addClasses")
-	public String addClasses(@RequestParam("className") String className,@RequestParam("feesAmount") int feesAmount) {
+	public String addClasses(@RequestParam("className") String className,@RequestParam("feesAmount") int feesAmount,
+			Model model) {
 	List<FeesClassesDto> classesList = 	adminDao.listClasses();
-	if(!classesList.contains(className)) {
-		adminDao.addClassesAndFees(className,feesAmount);	
-	}
-		return "redirect:/classes";
+	
+//	if(!classesList.contains(className)) {
+//		System.out.println(classesList);
+//		adminDao.addClassesAndFees(className,feesAmount);
+//		model.addAttribute("classMsg", "Classes Added Successfully");
+//	}
+//		model.addAttribute("classMsg", "Classes Already Exist");
+//		return "redirect:/classes";
+	
+	
+	
+	for(FeesClassesDto s : classesList) {
+		if(s.getClasses().equalsIgnoreCase(className)) {
+			System.out.println("Else part is working");
+			model.addAttribute("classMsg", "Classes Already Exist");
+			return "redirect:/classes";
+			
+		}else {
+			System.out.println(classesList);
+			adminDao.addClassesAndFees(className,feesAmount);
+			model.addAttribute("classMsg", "Classes Added Successfully");
+			return "redirect:/classes";
+		}
+		}
+	
+//	if(!classesList.contains(className)) {
+//		System.out.println(classesList);
+//		adminDao.addClassesAndFees(className,feesAmount);
+//		model.addAttribute("classMsg", "Classes Added Successfully");
+//		return "redirect:/classes";
+//	}else {
+//		System.out.println("Else part is working");
+//		model.addAttribute("classMsg", "Classes Already Exist");
+//		return "redirect:/classes";
+//	}
+	return "redirect:/classes";
 	}
 	
 	

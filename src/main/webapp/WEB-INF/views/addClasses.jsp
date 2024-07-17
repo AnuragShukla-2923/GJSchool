@@ -68,6 +68,7 @@ function validateform()
 			<input type="submit" value="Add Class">
 			 
 		</form:form>
+		<h1>${classMsg}</h1>
 		
 		<br> <br>
 		

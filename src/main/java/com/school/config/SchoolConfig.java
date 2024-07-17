@@ -34,8 +34,8 @@ public class SchoolConfig {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		dataSource.setUsername("root");
-		dataSource.setPassword("rootroot");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/gjschool");
+		dataSource.setPassword("root");
+		dataSource.setUrl("jdbc:mysql://localhost:3307/gjschool");
 		return dataSource;
 	}
 
