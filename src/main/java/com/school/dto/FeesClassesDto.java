@@ -20,7 +20,5 @@ public class FeesClassesDto {
 	public String toString() {
 		return "FeesClassesDto [classes=" + classes + ", fees=" + fees + "]";
 	}
-	
-	
 
 }

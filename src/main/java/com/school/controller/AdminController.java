@@ -21,6 +21,9 @@ public class AdminController {
 	@Autowired
 	public AdminDao adminDao;
 
+
+
+
 	@RequestMapping("/classes")
 	public String classes(Model model) {
 		List<FeesClassesDto> classes = adminDao.listClasses();
@@ -55,6 +58,7 @@ public class AdminController {
 		return "addClasses";
 	}
 
+
 	@RequestMapping("/session")
 	public String session(Model model) {
 		List<String> session = adminDao.listSession();
@@ -63,18 +67,18 @@ public class AdminController {
 	}
 
 	@RequestMapping("/addsession")
-	public String addSession(@RequestParam("sessionStart") Date sessionStart,
-			@RequestParam("sessionEnd") Date sessionEnd) {
-		List<String> sessionList = adminDao.listSession();
+	public String addSession(@RequestParam("sessionStart") Date sessionStart, @RequestParam("sessionEnd") Date sessionEnd) {
+	List<String> sessionList = 	adminDao.listSession();
 
-		SimpleDateFormat df = new SimpleDateFormat("yyyy");
-		System.out.println("start date " + df.format(sessionStart));
+	SimpleDateFormat df = new SimpleDateFormat("yyyy");
+	System.out.println("start date "+df.format(sessionStart));
 
-		if (!sessionList.contains(sessionStart + "-" + sessionEnd)) {
-			adminDao.addSession(df.format(sessionStart), df.format(sessionEnd));
-		}
+	if(!sessionList.contains(sessionStart+"-"+sessionEnd)) {
+		adminDao.addSession(df.format(sessionStart), df.format(sessionEnd));
+	}
 		return "redirect:/session";
 	}
+
 
 	@RequestMapping("/category")
 	public String category(Model model) {
@@ -85,12 +89,13 @@ public class AdminController {
 
 	@RequestMapping("/addcategory")
 	public String addCategory(@RequestParam("category") String category) {
-		List<String> categoryList = adminDao.listCategory();
-		if (!categoryList.contains(category)) {
-			adminDao.addCategory(category);
-		}
+	List<String> categoryList = 	adminDao.listCategory();
+	if(!categoryList.contains(category)) {
+		adminDao.addCategory(category);
+	}
 		return "redirect:/category";
 	}
+
 
 	@RequestMapping("/feestype")
 	public String feestype(Model model) {
@@ -101,10 +106,10 @@ public class AdminController {
 
 	@RequestMapping("/addfeestype")
 	public String addfeestype(@RequestParam("feestype") String feestype) {
-		List<String> feestypeList = adminDao.listfeestype();
-		if (!feestypeList.contains(feestype)) {
-			adminDao.addFeestype(feestype);
-		}
+	List<String> feestypeList = adminDao.listfeestype();
+	if(!feestypeList.contains(feestype)) {
+		adminDao.addFeestype(feestype);
+	}
 		return "redirect:/feestype";
 	}
 
@@ -120,21 +125,22 @@ public class AdminController {
 		return "redirect:/classes";
 	}
 
+
 	@RequestMapping("/deletesession")
 	public String delteSession(@RequestParam("session") String session) {
 		System.out.println(session);
-		String[] sessionTime = session.split("-");
+		String[]  sessionTime   = session.split("-");
 		String startSession = sessionTime[0];
 		String endSession = sessionTime[1];
-		System.out.println("start sessin " + startSession + " " + "End Session" + endSession);
+		System.out.println("start sessin "+startSession+ " "+ "End Session"+endSession);
 		adminDao.deleteSession(startSession, endSession);
 		return "redirect:/session";
 	}
-
 	@RequestMapping("/deletecategory")
 	public String delteCategory(@RequestParam("category") String category) {
 		adminDao.deleteCategory(category);
 		return "redirect:/category";
 	}
+
 
 }
