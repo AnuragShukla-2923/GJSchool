@@ -69,11 +69,8 @@ function validateform()
 			 
 		</form:form>
 		
-		
-		${classMsg}
-		
-		</script>
-		
+		<h2 align="center"><font color = "red"> ${classMsg} </font></h2>
+		<h2 align="center"><font color = "green"> ${classMsg1} </font></h2>
 		<br> <br>
 		
 		

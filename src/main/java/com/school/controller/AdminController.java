@@ -41,18 +41,15 @@ public class AdminController {
 		boolean classFound = false;
 		for (FeesClassesDto s : classesList) {
 			if (s.getClasses().equalsIgnoreCase(className)) {
-				System.out.println("Hello India");
-				model.addAttribute("classMsg", "Classes Already Exist");
+				model.addAttribute("classMsg", "Class Already Exist");
 				classFound = true;
 				break;
 			}
 		}
 		if (!classFound) {
 			adminDao.addClassesAndFees(className, feesAmount);
-			System.out.println("Hello World");
-			model.addAttribute("classMsg", "Classes Added Successfully");
+			model.addAttribute("classMsg1", "Class Added Successfully");
 		}
-
 		List<FeesClassesDto> classes = adminDao.listClasses();
 		model.addAttribute("classes", classes);
 		return "addClasses";
