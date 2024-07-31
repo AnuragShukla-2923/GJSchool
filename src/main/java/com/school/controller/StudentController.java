@@ -378,6 +378,61 @@ List<String> scholarList = 	studentsDao.getListOfScholarNumbers();
 	}
 	
 	
+	
+	@RequestMapping("/discountedstudentsList")
+	public String discountedstudentsList(Model model, HttpServletRequest request) {
+		int totalRecords;
+		int pageid;
+		
+		if(request.getParameter("recordsPerPAge")==null) {
+			totalRecords = 10;
+		}else {
+			totalRecords = Integer.parseInt(request.getParameter("recordsPerPAge"));	
+		}
+		
+		
+		String pageNo= request.getParameter("currentPage");
+		
+		if(pageNo==null) {
+			pageid =1;
+		}else {
+		 pageid = Integer.parseInt(pageNo);
+		}
+		System.out.println("page no is "+pageid);
+		
+        if(pageid==1){}    
+        else{    
+             pageid=(pageid-1)*totalRecords+1;    
+        }    
+		
+		List<FeesClassesDto> classesList = adminDao.listClasses();
+		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
+		
+		List<AdmissionDto> totalStudentsList = studentsDao.listdiscountedStudents();
+        int totalPageCount = (totalStudentsList.size()/totalRecords)+1;
+		List<AdmissionDto> studentsList = studentsDao.getDiscountedStudentsByPage(pageid,totalRecords);    
+		
+		List<String> scholarList = 	studentsDao.getListOfdiscountedScholarNumbers();
+		
+		int totalFees =  studentsDao.totalFees();
+		int totalRemFees = studentsDao.totalRemainingFees();
+		List<String> session = adminDao.listSession();
+		
+		model.addAttribute("session", session);
+		model.addAttribute("classes", classesList);
+		model.addAttribute("studentsList", studentsList);
+		model.addAttribute("remFeesList",remFeesList);
+		model.addAttribute("totalFees", totalFees);
+		model.addAttribute("totalRemFees", totalRemFees);
+		model.addAttribute("totalPageCount",totalPageCount);
+		model.addAttribute("pageid",pageid);
+		
+		System.out.println("pageId : "+pageid + "total page count :"+totalPageCount);
+		return "discountedstudentsList";
+	}
+	
+	
+	
 	@RequestMapping("/addStudents")
 	public String addStudents(Model model,StudentsDTO dto) {
 		model.addAttribute("student", dto);

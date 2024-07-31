@@ -5,61 +5,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    
-     <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-      <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <style>
-        @media (min-width: 1025px) {
-  .h-custom {
-    height: 100vh !important;
-  }
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<style>
+@media ( min-width : 1025px) {
+	.h-custom {
+		height: 100vh !important;
+	}
 }
-.card-registration .select-input.form-control[readonly]:not([disabled]) {
-  font-size: 1rem;
-  line-height: 2.15;
-  padding-left: .75em;
-  padding-right: .75em;
+
+.card-registration .select-input.form-control[readonly]:not([disabled])
+	{
+	font-size: 1rem;
+	line-height: 2.15;
+	padding-left: .75em;
+	padding-right: .75em;
 }
+
 .card-registration .select-arrow {
-  top: 13px;
+	top: 13px;
 }
 
 .gradient-custom-2 {
-  /* fallback for old browsers */
-  background: #a1c4fd;
-
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1));
-
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1))
+	/* fallback for old browsers */
+	background: #a1c4fd;
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: -webkit-linear-gradient(to right, rgba(161, 196, 253, 1),
+		rgba(194, 233, 251, 1));
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: linear-gradient(to right, rgba(161, 196, 253, 1),
+		rgba(194, 233, 251, 1))
 }
 
 .bg-indigo {
-  background-color: #4835d4;
-}
-@media (min-width: 992px) {
-  .card-registration-2 .bg-indigo {
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-  }
-}
-@media (max-width: 991px) {
-  .card-registration-2 .bg-indigo {
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-  }
+	background-color: #4835d4;
 }
 
-    </style>
-  
+@media ( min-width : 992px) {
+	.card-registration-2 .bg-indigo {
+		border-top-right-radius: 15px;
+		border-bottom-right-radius: 15px;
+	}
+}
 
-	 <script type="text/javascript">
+@media ( max-width : 991px) {
+	.card-registration-2 .bg-indigo {
+		border-bottom-left-radius: 15px;
+		border-bottom-right-radius: 15px;
+	}
+}
+</style>
+
+
+<script type="text/javascript">
             function validateform()
             {
             	var valid = true;
@@ -92,6 +99,8 @@
                 var aadhar = document.getElementById("aadhar");
                 var dob = document.getElementById("dob");
                 var admissionDate = document.getElementById("admissionDate");
+                var discountAmt = document.getElementById("discountAmt");
+                var discountReference = document.getElementById("discountReference");
                
 				
 				function isValidName(name) {
@@ -107,7 +116,27 @@
                     	document.getElementById("name").style="background-color: white; border-color: black";
                     }
 				
+				
+				
+				let discountAmtRegex ="^[0-9]{2,4}$";
+                
+				
+				if(discountAmt.value.length<=0 || discountAmtRegex.!test(discountAmt.value) || discountAmt.value.length>20 ) {
+                	document.getElementById("discountAmt").style="background-color: #FBE3E4; border-color: Red";
+                        valid = false;
+                    }else{
+                    	document.getElementById("discountAmt").style="background-color: white; border-color: black";
+                    }
 				 
+				
+				
+				let discountReferenceNameRegex ="^[a-zA-Z ]{3,20}$";
+				if(discountReference.value.length<=0 || discountReferenceNameRegex.!test(discountReference.value) || discountReference.value.length>20 ) {
+                	document.getElementById("discountReference").style="background-color: #FBE3E4; border-color: Red";
+                        valid = false;
+                    }else{
+                    	document.getElementById("discountReference").style="background-color: white; border-color: black";
+                    }
 
 
                 if(scholarNumber.value.length<=0 || isNaN(scholarNumber.value) || scholarNumber.value.length>20) {
@@ -947,494 +976,653 @@
                    }else{
                       document.getElementById("bankName").style=" border-color: green";
                    }
+                   
+                // validation for Discount amount discountAmt
+                let discountAmtRegex ="^[0-9]{2,4}$";
+                   let discountAmt = document.getElementById("discountAmt").value.trim();
+                             if(discountAmt=="" || discountAmt.length<=0){
+                               document.getElementById("discountAmt").style="background-color: #FBE3E4; border-color: Red";
+
+                             }else if(!discountAmtRegex.test(discountAmt) || !(discountAmt.length<2)){
+                               document.getElementById("discountAmt").style="background-color: #FBE3E4; border-color: Red";
+
+                             }else{
+                                document.getElementById("discountAmt").style=" border-color: green";
+                             }
+                            
+                          // validation for Discount Reference discountReference
+                          let discountReferenceNameRegex ="^[a-zA-Z ]{3,20}$";
+                             let discountReference = document.getElementById("discountReference").value.trim();
+                                       if(discountReference=="" || discountReference.length<=0){
+                                         document.getElementById("discountReference").style="background-color: #FBE3E4; border-color: Red";
+
+                                       }else if(!discountReferenceNameRegex.test(discountReference) || !(discountReference.length<2)){
+                                         document.getElementById("discountReference").style="background-color: #FBE3E4; border-color: Red";
+
+                                       }else{
+                                          document.getElementById("discountReference").style=" border-color: green";
+                                       }            
 
 
-          // below bracket is of functionClosingBracket
+       
           //return true;
          }
             
         </script>
 
 
-    <title>Registration Form</title>
+ 
+<title>Registration Form</title>
 </head>
 <body>
-<jsp:include page="../../verMenu.jsp"></jsp:include>
-<form:form action="saveAdmissison" modelAttribute="admissionDto" method="post" enctype="multipart/form-data" onsubmit="return validateform()"> --return !validateform()
+	<jsp:include page="../../verMenu.jsp"></jsp:include>
+	<form:form action="saveAdmissison" modelAttribute="admissionDto"
+		method="post" enctype="multipart/form-data"
+		onsubmit="return validateform()"> <!-- return !validateform() -->
     
 			<form:input type="hidden" path="id" />
-    
-    <section class="h-100 h-custom gradient-custom-2">
-        <div class="container py-5 h-100">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12">
-              <div class="card card-registration card-registration-2" style="border-radius: 15px;">
-                <div class="card-body p-0">
-                  <div class="row g-0">
-                    <div class="col-lg-6">
-                      <div class="p-5">
-                        <h3 class="fw-normal mb-5" style="color: #4835d4;">Student Registration Form</h3>
-      
-                        <div class="row">
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                              <label class="form-label" for="form3Examplev2">Name</label>
-                              <form:input type="text" id="name" onchange="fieldValidation()" path="name" class="form-control form-control-lg" placeholder="Name"/>
-                              </div>
-        
-                            </div>
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev3">Scholar Number</label>
-	                            <form:input type="text" id="scholarNumber" path="scholarNumber" placeholder="Scholar Number" class="form-control form-control-lg"/>
-                              </div>
-        
-                            </div>
-                          </div>
-      
-                        <div class="row">
-                          <div class="col-md-6 mb-4 pb-2">
-      
-                            <div class="form-outline">
-                              <label class="form-label" for="form3Examplev2">Father's name</label>
-                                <form:input type="text" id="fName" onchange="fieldValidation()" path="fName" placeholder="Father Name" class="form-control form-control-lg"/>
-                            </div>
-      
-                          </div>
-                          <div class="col-md-6 mb-4 pb-2">
-      
-                            <div class="form-outline">
-                         	     <label class="form-label" for="form3Examplev3">Father Occupation</label>
-                              <form:input type="text" id="fOccupation" onchange="fieldValidation()" path="fOccupation" placeholder="Father Name" class="form-control form-control-lg"/>
-                            </div>
-      
-                          </div>
-                        </div>
-      
-                        <div class="row">
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev2">Mother Name</label>
-                              <form:input type="text" class="form-control form-control-lg" id="mName" onchange="fieldValidation()" path="mName" placeholder="Mother Name"/>
-                              </div>
-        
-                            </div>
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                               <label class="form-label" for="form3Examplev2">Mother Occupation</label>
-                                <form:input type="text" class="form-control form-control-lg" id="mOccupation" onchange="fieldValidation()" path="mOccupation" placeholder="Father Name"/>
-                              
-                              </div>
-        
-                            </div>
-                          </div>
-                           <div class="row">
-                          <div class="col-md-6 mb-4 pb-2">
-      
-                            <div class="form-outline">
-                              <label class="form-label" for="form3Examplev2">Father's Education</label>
-                                <form:input type="text" id="fEducation" onchange="fieldValidation()" path="fEducation" placeholder="Father's Education" class="form-control form-control-lg"/>
-                            </div>
-      
-                          </div>
-                          <div class="col-md-6 mb-4 pb-2">
-      
-                            <div class="form-outline">
-                         	     <label class="form-label" for="form3Examplev3">Mother Education</label>
-                              <form:input type="text" id="mEducation" onchange="fieldValidation()" path="mEducation" placeholder="Mother Education" class="form-control form-control-lg"/>
-                            </div>
-      
-                          </div>
-                        </div>
-      
-                          <div class="row">
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev2">Class</label>
 
-					<form:select path="stuClass">
-					<j:forEach var="classesList" items="${classesList}">
-					<option value="${classesList.classes}">${classesList.classes}</option>
-					</j:forEach>
-					</form:select>
+		<section class="h-100 h-custom gradient-custom-2">
+			<div class="container py-5 h-100">
+				<div
+					class="row d-flex justify-content-center align-items-center h-100">
+					<div class="col-12">
+						<div class="card card-registration card-registration-2"
+							style="border-radius: 15px;">
+							<div class="card-body p-0">
+								<div class="row g-0">
+									<div class="col-lg-6">
+										<div class="p-5">
+											<h3 class="fw-normal mb-5" style="color: #4835d4;">Student
+												Registration Form</h3>
+
+											<div class="row">
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev2">Name</label>
+														<form:input type="text" id="name"
+															onchange="fieldValidation()" path="name"
+															class="form-control form-control-lg" placeholder="Name" />
+													</div>
+
+												</div>
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev3">Scholar
+															Number</label>
+														<form:input type="text" id="scholarNumber"
+															path="scholarNumber" placeholder="Scholar Number"
+															class="form-control form-control-lg" />
+													</div>
+
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev2">Father's
+															name</label>
+														<form:input type="text" id="fName"
+															onchange="fieldValidation()" path="fName"
+															placeholder="Father Name"
+															class="form-control form-control-lg" />
+													</div>
+
+												</div>
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev3">Father
+															Occupation</label>
+														<form:input type="text" id="fOccupation"
+															onchange="fieldValidation()" path="fOccupation"
+															placeholder="Father Name"
+															class="form-control form-control-lg" />
+													</div>
+
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev2">Mother
+															Name</label>
+														<form:input type="text"
+															class="form-control form-control-lg" id="mName"
+															onchange="fieldValidation()" path="mName"
+															placeholder="Mother Name" />
+													</div>
+
+												</div>
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev2">Mother
+															Occupation</label>
+														<form:input type="text"
+															class="form-control form-control-lg" id="mOccupation"
+															onchange="fieldValidation()" path="mOccupation"
+															placeholder="Father Name" />
+
+													</div>
+
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev2">Father's
+															Education</label>
+														<form:input type="text" id="fEducation"
+															onchange="fieldValidation()" path="fEducation"
+															placeholder="Father's Education"
+															class="form-control form-control-lg" />
+													</div>
+
+												</div>
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev3">Mother
+															Education</label>
+														<form:input type="text" id="mEducation"
+															onchange="fieldValidation()" path="mEducation"
+															placeholder="Mother Education"
+															class="form-control form-control-lg" />
+													</div>
+
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev2">Class</label>
+
+														<form:select path="stuClass">
+															<j:forEach var="classesList" items="${classesList}">
+																<option value="${classesList.classes}">${classesList.classes}</option>
+															</j:forEach>
+														</form:select>
 
 
-<!--  for populating Class
+														<!--  for populating Class
 					<form:select path="stuClass">
  					<option value="">${admissionDto.stuClass}</option>  
 					</form:select>-->
-	                            
-                              </div>
 
-        
-                            </div>
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev3">Last Class Attended</label>
-					 <form:select path="lastClassAttended">
-					<j:forEach var="classesList" items="${classesList}">
-					<option value="${classesList.classes}">${classesList.classes}</option>
-					</j:forEach>
-					</form:select>
-			
-                              </div>
-        
-                            </div>
-                          </div>
-      
-                          <div class="row">
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev2">Branch</label>
-           		 <form:select path="branch" >
-						<option value="Gyan Jyoti Public School">Gyan Jyoti Public School</option>
-						<option value="Gyan Jyoti International School">Gyan Jyoti International School</option>
-					</form:select>
-			                  </div>
-        
-                            </div>
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev3">Session</label>
+													</div>
 
-			<div class="form-group col-md-6">
-					<form:select path="session" >
-						<j:forEach var="session" items="${session}">
-					<option value="${session}">${session}</option>
-					</j:forEach>
-					</form:select>
+
+												</div>
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev3">Last
+															Class Attended</label>
+														<form:select path="lastClassAttended">
+															<j:forEach var="classesList" items="${classesList}">
+																<option value="${classesList.classes}">${classesList.classes}</option>
+															</j:forEach>
+														</form:select>
+
+													</div>
+
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev2">Branch</label>
+														<form:select path="branch">
+															<option value="Gyan Jyoti Public School">Gyan
+																Jyoti Public School</option>
+															<option value="Gyan Jyoti International School">Gyan
+																Jyoti International School</option>
+														</form:select>
+													</div>
+
+												</div>
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev3">Session</label>
+
+														<div class="form-group col-md-6">
+															<form:select path="session">
+																<j:forEach var="session" items="${session}">
+																	<option value="${session}">${session}</option>
+																</j:forEach>
+															</form:select>
+														</div>
+
+
+													</div>
+
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev2">DOB</label>
+														<form:input type="date" id="dob" path="dob"
+															class="form-control form-control-lg" />
+													</div>
+
+												</div>
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev3">Place
+															of Birth</label>
+														<form:input type="text"
+															class="form-control form-control-lg" id="birthPlace"
+															onchange="fieldValidation()" path="birthPlace"
+															placeholder="Place Of  Birth" />
+													</div>
+
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev2">Category</label><br>
+														<form:select path="category">
+															<j:forEach var="listCategory" items="${listCategory}">
+																<option value="${listCategory}">${listCategory}</option>
+															</j:forEach>
+														</form:select>
+													</div>
+
+												</div>
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev3">Religion</label>
+														<form:input type="text"
+															class="form-control form-control-lg" id="religion"
+															onchange="fieldValidation()" path="religion"
+															placeholder="Religion" />
+													</div>
+
+												</div>
+											</div>
+
+
+
+
+											<div class="row">
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev2">Admission
+															Date</label>
+														<form:input type="date" id="admissionDate"
+															path="admissionDate" class="form-control form-control-lg" />
+													</div>
+
+												</div>
+
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev3">Last
+															School Studied</label>
+														<form:input type="text"
+															class="form-control form-control-lg"
+															id="lastSchoolStudied" onchange="extraFieldValidation()"
+															path="lastSchoolStudied"
+															placeholder="Last Attended School" />
+													</div>
+												</div>
+
+											</div>
+
+											<div class="row">
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev2">Gender
+															:</label>
+
+														<form:select path="gender">
+															<option value="Male">Male</option>
+															<option value="Female">Female</option>
+														</form:select>
+													</div>
+
+
+												</div>
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev2">Admission
+															Type :</label> <select id="admissionType" name="admissionType"
+															path="admissionType">
+															<option value="Regular">Regular</option>
+															<option value="Private">Private</option>
+															<option value="Other">Other</option>
+
+
+
+
+														</select>
+													</div>
+
+
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev2">Discount Amount</label>
+														<form:input type="text" id="discountAmt"
+															onchange="fieldValidation()" path="discountAmt"
+															class="form-control form-control-lg" placeholder="Amount" />
+													</div>
+
+												</div>
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev3">Discount Reference</label>
+														<form:input type="text" id="discountReference"
+															path="discountReference" placeholder="Name of Reference"
+															class="form-control form-control-lg" />
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+
+									<div class="col-lg-6 bg-indigo text-white">
+										<div class="p-5">
+											<h3 class="fw-normal mb-5">Contact Details</h3>
+
+											<div class="row">
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev2">Contact</label>
+														<form:input type="text"
+															class="form-control form-control-lg" id="contact"
+															onchange="contactValidation()" path="contact"
+															placeholder="Contact Number" />
+													</div>
+
+												</div>
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev3">Alt-Contact</label>
+														<form:input type="text"
+															class="form-control form-control-lg" id="altContact"
+															onchange="contactValidation()" path="altContact"
+															placeholder="Contact Number" />
+													</div>
+
+												</div>
+											</div>
+
+
+											<div class="row">
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev2">Aadhar
+															Number</label>
+														<form:input type="text"
+															class="form-control form-control-lg" id="aadhar"
+															onchange="numberValidation()" path="aadhar"
+															placeholder="Aadhar Number" />
+													</div>
+
+												</div>
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev3">Student
+															Samagra Id</label>
+														<form:input type="text"
+															class="form-control form-control-lg" id="samagraId"
+															onchange="numberValidation()" path="samagraId"
+															placeholder="Student Samagra ID " />
+													</div>
+
+												</div>
+											</div>
+
+
+
+											<div class="row">
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev2">Bank
+															Name</label>
+														<form:input type="text"
+															class="form-control form-control-lg" id="bankName"
+															onchange="fieldValidation()" path="bankName"
+															placeholder="Bank Names " />
+													</div>
+
+												</div>
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev3">Account
+															Number</label>
+														<form:input type="text"
+															class="form-control form-control-lg" id="accNo"
+															path="accNo" onchange="numberValidation()"
+															placeholder="Account No" />
+													</div>
+
+												</div>
+											</div>
+
+
+
+
+											<div class="row">
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline">
+														<label class="form-label" for="form3Examplev2">IFSC</label>
+														<form:input type="text"
+															class="form-control form-control-lg" id="ifsc"
+															onchange="extraFieldValidation()" path="ifsc"
+															placeholder="IFSC Code" />
+													</div>
+
+												</div>
+												<div class="col-md-6 mb-4 pb-2">
+
+													<div class="form-outline form-white">
+														<label class="form-label" for="form3Examplea4">Zip
+															Code</label>
+														<form:input type="text"
+															class="form-control form-control-lg" id="zip"
+															onchange="numberValidation()" path="zip"
+															placeholder="Zip" />
+													</div>
+
+
+												</div>
+											</div>
+
+
+											<div class="mb-4 pb-2">
+												<div class="form-outline form-white">
+													<label class="form-label" for="form3Examplea3">Address
+													</label>
+													<form:input type="text" path="address" id="address"
+														onchange="extraFieldValidation()"
+														class="form-control form-control-lg" />
+												</div>
+											</div>
+
+
+											<div class="row">
+												<div class="col-md-5 mb-4 pb-2">
+
+													<div class="form-outline form-white">
+														<label class="form-label" for="form3Examplea4">State</label>
+														<form:input id="state" path="state"
+															class="form-control form-control-lg" placeholder="State" />
+													</div>
+
+												</div>
+												<div class="col-md-7 mb-4 pb-2">
+
+													<div class="form-outline form-white">
+														<label class="form-label" for="form3Examplea5">City</label>
+														<form:input type="text"
+															class="form-control form-control-lg" id="city"
+															path="city" placeholder="city" />
+													</div>
+
+												</div>
+											</div>
+
+
+											<div class="row">
+												<div class="col-md-5 mb-4 pb-2">
+
+													<div class="form-outline form-white">
+														<label> Aadhar Photo</label> <input type="file"
+															id="aadharPic" name="aadharPic"
+															onChange="FilevalidationaadharPic()" />
+													</div>
+
+												</div>
+												<div class="col-md-7 mb-4 pb-2">
+
+													<div class="form-outline form-white">
+														<label for="form:inputEmail4">Student Photo</label> <input
+															type="file" id="studentPic" name="studentPic"
+															onChange="FilevalidationstudentPic()" />
+													</div>
+
+												</div>
+											</div>
+
+
+											<div class="row">
+												<div class="col-md-5 mb-4 pb-2">
+
+													<div class="form-outline form-white">
+														<label> Samagra Photo</label> <input type="file"
+															id="samagraPic" name="samagraPic"
+															onChange="FilevalidationsamagraPic()" />
+													</div>
+
+												</div>
+												<div class="col-md-7 mb-4 pb-2">
+
+													<div class="form-outline form-white">
+														<label for="form:inputEmail4">Cast Certificate</label> <input
+															type="file" id="castPic" name="castPic"
+															onChange="FilevalidationcastPic()" />
+													</div>
+
+												</div>
+											</div>
+
+
+											<div class="row">
+												<div class="col-md-5 mb-4 pb-2">
+
+													<div class="form-outline form-white">
+														<label for="form:inputEmail4">TC Photo</label> <input
+															type="file" id="tcPic" name="tcPic"
+															onChange="FilevalidationtcPic()" />
+													</div>
+
+												</div>
+												<div class="col-md-7 mb-4 pb-2">
+
+													<div class="form-outline form-white">
+														<label>Migration Photo</label> <input type="file"
+															id="migrationPic" name="migrationPic"
+															onChange="FilevalidationmigrationPic()" />
+													</div>
+
+												</div>
+											</div>
+
+
+											<div class="row">
+												<div class="col-md-5 mb-4 pb-2">
+
+													<div class="form-outline form-white">
+														<label for="form:inputEmail4">Father AadharCard</label> <input
+															type="file" id="fatherAadhar" name="fatherAadhar"
+															onChange="FilevalidationfatherAadhar()" />
+													</div>
+
+												</div>
+												<div class="col-md-7 mb-4 pb-2">
+
+													<div class="form-outline form-white">
+														<label>Mother AadharCard</label> <input type="file"
+															id="motherAadhar" name="motherAadhar"
+															onChange="FilevalidationmotherAadhar()" />
+													</div>
+
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-5 mb-4 pb-2">
+
+													<div class="form-outline form-white">
+														<label for="form:inputEmail4">Birth Certification</label>
+														<input type="file" id="BirthPic" name="BirthPic"
+															onchange="FilevalidationBirthPic()" />
+													</div>
+
+												</div>
+												<div class="col-md-7 mb-4 pb-2">
+
+													<div class="form-outline form-white"></div>
+
+												</div>
+											</div>
+
+
+											<input type="submit" class="btn btn-light btn-lg"
+												data-mdb-ripple-color="dark" value="Admission Confirm">
+											<br>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-
-
-                              </div>
-        
-                            </div>
-                          </div>
-
-                          <div class="row">
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev2">DOB</label>
-		<form:input type="date" id="dob" path="dob" class="form-control form-control-lg"/>
-                              </div>
-        
-                            </div>
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev3">Place of Birth</label>
-		<form:input type="text" class="form-control form-control-lg" id="birthPlace" onchange="fieldValidation()" path="birthPlace" placeholder="Place Of  Birth"/>
-                              </div>
-        
-                            </div>
-                          </div>
-                          
-                            <div class="row">
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                            <div class="form-outline">
-							   <label class="form-label" for="form3Examplev2">Category</label><br>
-							    <form:select path="category" >
-								    <j:forEach var="listCategory" items="${listCategory}">
-									<option value="${listCategory}">${listCategory}</option>
-									</j:forEach>
-								</form:select>
-                             </div>
-        
-                            </div>
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev3">Religion</label>
-                                <form:input type="text" class="form-control form-control-lg" id="religion" onchange="fieldValidation()" path="religion" placeholder="Religion"/>
-                              </div>
-        
-                            </div>
-                          </div>
-                          
-                          
-                          
-                          
-                          <div class="row">
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev2">Admission Date</label>                                
-                                <form:input type="date" id="admissionDate" path="admissionDate" class="form-control form-control-lg"/>
-                              </div>
-        
-                            </div>
- 
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev3">Last School Studied</label>
-                                <form:input type="text" class="form-control form-control-lg" id="lastSchoolStudied" onchange="extraFieldValidation()" path="lastSchoolStudied" placeholder="Last Attended School"/>
-                              </div>
-                       </div>
- 
-                         </div>
-      
- <div class="row">
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                             <div class="form-outline">
-                                <label class="form-label" for="form3Examplev2">Gender :</label>
-                                
-					<form:select path="gender">
-					<option value="Male">Male</option>
-					<option value="Female">Female</option>
-					</form:select>                                       
-                               </div>
-                              
-                
-                            </div>
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                             <label class="form-label" for="form3Examplev2">Admission Type :</label>
-                          <select id="admissionType" name="admissionType" path="admissionType">
-  <option value="Regular"> Regular </option>
-  <option value="Private">Private</option>
-  <option value="Other">Other</option>
-  
-</select>
-           </div>
-      
-      
-                      </div>
-                      </div>
-                      </div>
-                      </div>
-                    
-                    
-                   
-                    <div class="col-lg-6 bg-indigo text-white">
-                      <div class="p-5">
-                        <h3 class="fw-normal mb-5">Contact Details</h3>
-      
-                          <div class="row">
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev2">Contact</label>                                
-                                <form:input type="text" class="form-control form-control-lg" id="contact" onchange="contactValidation()" path="contact"  placeholder="Contact Number"/>
-                              </div>
-        
-                            </div>
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev3">Alt-Contact</label>
-                              <form:input type="text" class="form-control form-control-lg" id="altContact" onchange="contactValidation()" path="altContact" placeholder="Contact Number"/>
-                              </div>
-        
-                            </div>
-                          </div>
-                          
-                          
-                          <div class="row">
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev2">Aadhar Number</label>                                
-                                <form:input type="text" class="form-control form-control-lg" id="aadhar" onchange="numberValidation()" path="aadhar" placeholder="Aadhar Number"/>
-                              </div>
-        
-                            </div>
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev3">Student Samagra Id</label>
-                            <form:input type="text" class="form-control form-control-lg" id="samagraId" onchange="numberValidation()" path="samagraId" placeholder="Student Samagra ID "/>
-                              </div>
-        
-                            </div>
-                          </div>
-                          
-
-                          
-                            <div class="row">
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev2">Bank Name</label>                                
-                                <form:input type="text" class="form-control form-control-lg" id="bankName" onchange="fieldValidation()" path="bankName" placeholder="Bank Names "/>
-                              </div>
-        
-                            </div>
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev3">Account Number</label>
-                           <form:input type="text" class="form-control form-control-lg" id="accNo" path="accNo" onchange="numberValidation()" placeholder="Account No"/>
-                              </div>
-        
-                            </div>
-                          </div>
-                          
-                          
-                          
-                          
-                          <div class="row">
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev2">IFSC</label>                                
-                              <form:input type="text" class="form-control form-control-lg" id="ifsc" onchange="extraFieldValidation()" path="ifsc" placeholder="IFSC Code"/>
-                              </div>
-        
-                            </div>
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                             <div class="form-outline form-white">
-                             <label class="form-label" for="form3Examplea4">Zip Code</label>
-                              <form:input type="text" class="form-control form-control-lg" id="zip" onchange="numberValidation()" path="zip" placeholder="Zip"/>
-                            </div>
-      
-        
-                            </div>
-                          </div>
-                          
-                          
-                          <div class="mb-4 pb-2">
-                          <div class="form-outline form-white">
-							<label class="form-label" for="form3Examplea3">Address </label>
-                            <form:input type="text" path="address" id="address" onchange="extraFieldValidation()" class="form-control form-control-lg" />
-                          </div>
-                        </div>      
-                        
-      
-                        <div class="row">
-                          <div class="col-md-5 mb-4 pb-2">
-      
-                            <div class="form-outline form-white">
-                              <label class="form-label" for="form3Examplea4">State</label>
-                             <form:input id="state" path="state" class="form-control form-control-lg" placeholder="State"/>
-                            </div>
-      
-                          </div>
-                          <div class="col-md-7 mb-4 pb-2">
-      
-                            <div class="form-outline form-white">
-                            <label class="form-label" for="form3Examplea5">City</label>
-                              <form:input type="text" class="form-control form-control-lg" id="city" path="city" placeholder="city"/>
-                            </div>
-      
-                          </div>
-                        </div>
-                        
-                        
-                                          <div class="row">
-                          <div class="col-md-5 mb-4 pb-2">
-      
-                            <div class="form-outline form-white">
-                              <label > Aadhar Photo</label>
-                            <input type="file" id="aadharPic" name="aadharPic" onChange="FilevalidationaadharPic()" />
-                            </div>
-      
-                          </div>
-                          <div class="col-md-7 mb-4 pb-2">
-      
-                            <div class="form-outline form-white">       
-                            <label for="form:inputEmail4">Student Photo</label> <input type="file" id="studentPic" name="studentPic" onChange="FilevalidationstudentPic()" />
-                            </div>
-      
-                          </div>
-                        </div>
-                        
-                        
-                                                         <div class="row">
-                          <div class="col-md-5 mb-4 pb-2">
-      
-                            <div class="form-outline form-white">
-                              <label > Samagra Photo</label> <input type="file" id="samagraPic" name="samagraPic" onChange="FilevalidationsamagraPic()"/>
-                            </div>
-      
-                          </div>
-                          <div class="col-md-7 mb-4 pb-2">
-      
-                            <div class="form-outline form-white">       
-                           <label for="form:inputEmail4">Cast Certificate</label> <input type="file" id ="castPic" name="castPic" onChange="FilevalidationcastPic()" />
-                            </div>
-      
-                          </div>
-                        </div>
-      		 
-                        
-                                                                     <div class="row">
-                          <div class="col-md-5 mb-4 pb-2">
-      
-                            <div class="form-outline form-white">
-                             <label for="form:inputEmail4">TC Photo</label> <input type="file" id="tcPic" name="tcPic"  onChange="FilevalidationtcPic()"/>
-                            </div>
-      
-                          </div>
-                          <div class="col-md-7 mb-4 pb-2">
-      
-                            <div class="form-outline form-white">       
-                          <label >Migration Photo</label> <input type="file" id="migrationPic" name="migrationPic" onChange="FilevalidationmigrationPic()" />
-                            </div>
-      
-                          </div>
-                        </div>
-                        
-                        
-                                                                     <div class="row">
-                          <div class="col-md-5 mb-4 pb-2">
-      
-                            <div class="form-outline form-white">
-                             <label for="form:inputEmail4">Father AadharCard</label> <input type="file" id="fatherAadhar" name="fatherAadhar"  onChange="FilevalidationfatherAadhar()"/>
-                            </div>
-      
-                          </div>
-                          <div class="col-md-7 mb-4 pb-2">
-      
-                            <div class="form-outline form-white">       
-                          <label >Mother AadharCard</label> <input type="file" id="motherAadhar" name="motherAadhar" onChange="FilevalidationmotherAadhar()" />
-                            </div>
-      
-                          </div>
-                        </div>
-                        
-                                                                     <div class="row">
-                          <div class="col-md-5 mb-4 pb-2">
-      
-                            <div class="form-outline form-white">
-                             <label for="form:inputEmail4">Birth Certification</label> <input type="file" id="BirthPic" name="BirthPic" onchange="FilevalidationBirthPic()"/>
-                            </div>
-      
-                          </div>
-                          <div class="col-md-7 mb-4 pb-2">
-      
-                            <div class="form-outline form-white">       
-                          
-                            </div>
-      
-                          </div>
-                        </div>
-                        
-      
-                        <input type="submit" class="btn btn-light btn-lg" data-mdb-ripple-color="dark" value="Admission Confirm">
-      	<br> 
-		      
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> </form:form>
+			</div>
+		</section>
+	</form:form>
 </body>
 </html>

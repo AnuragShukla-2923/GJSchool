@@ -17,6 +17,8 @@
 <br> 
 <a href="studentsList">Students List</a>
 <br> 
+<a href="discountedstudentsList">Discounted Students List</a>
+<br>
 <a href="submitFees">Fees Submit</a>
 <br> 
 <a href="session">Session</a>
@@ -30,6 +32,13 @@
 <a href="adLogin">Administrative login</a>
 <br> 
 <a href="feesReport">Fees Report</a>
+<br> 
+
+<a href="http://localhost:8082/student/allStudents">All Students</a>
+<br> 
+<a href="http://localhost:8082/student/3">Single Student</a>
+<br> 
+<a href="http://localhost:9090/students/deleteStudentById/52" >Delete Student</a>
 <br> 
 
 

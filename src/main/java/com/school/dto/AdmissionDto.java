@@ -45,6 +45,8 @@ public class AdmissionDto {
 	public String fEducation;
 	public String mEducation;
 	public String admissionType;
+	public String discountAmt;
+	public String discountReference;
 	
 	
 
@@ -286,6 +288,18 @@ public String getAadharPhoto() {
 	public void setReligion(String religion) {
 		this.religion = religion;
 	}
+	public String getDiscountAmt() {
+		return discountAmt;
+	}
+	public void setDiscountAmt(String discountAmt) {
+		this.discountAmt = discountAmt;
+	}
+	public String getDiscountReference() {
+		return discountReference;
+	}
+	public void setDiscountReference(String discountReference) {
+		this.discountReference = discountReference;
+	}
 	@Override
 	public String toString() {
 		return "AdmissionDto [id=" + id + ", name=" + name + ", fName=" + fName + ", fOccupation=" + fOccupation
@@ -296,11 +310,9 @@ public String getAadharPhoto() {
 				+ ", stuClass=" + stuClass + ", fees=" + fees + ", gender=" + gender + ", category=" + category
 				+ ", admissionDate=" + admissionDate + ", scholarNumber=" + scholarNumber + ", lastSchoolStudied="
 				+ lastSchoolStudied + ", birthPlace=" + birthPlace + ", religion=" + religion + ", session=" + session
-				+ "]";
+				+ ", aadharPhoto=" + aadharPhoto + ", studentPhoto=" + studentPhoto + ", samagraPhoto=" + samagraPhoto
+				+ ", castPhoto=" + castPhoto + ", tcPhoto=" + tcPhoto + ", migrationPhoto=" + migrationPhoto
+				+ ", fEducation=" + fEducation + ", mEducation=" + mEducation + ", admissionType=" + admissionType
+				+ ", discountAmt=" + discountAmt + ", discountReference=" + discountReference + "]";
 	}
-	
-	
-	
-	
-	
 }

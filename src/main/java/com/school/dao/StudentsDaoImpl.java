@@ -41,6 +41,10 @@ public class StudentsDaoImpl implements StudentsDao {
 		return jdbcTemplate.queryForList(sql,String.class);  
 	}
 	
+	public List<String> getListOfdiscountedScholarNumbers() {
+		String sql = "select scholarNumber from students where discountAmt>0";
+		return jdbcTemplate.queryForList(sql,String.class);  
+	}
 
 
 
@@ -49,7 +53,14 @@ public class StudentsDaoImpl implements StudentsDao {
 	  
 	    List<AdmissionDto> studentList = jdbcTemplate.query(sql,new StudentsMapper(),pageid-1,total);
 	    return studentList;	    		
-	}    
+	} 
+	
+	public List<AdmissionDto> getDiscountedStudentsByPage(int pageid,int total){    
+	 	String sql="SELECT * FROM students where discountAmt>0"; 
+	  
+	    List<AdmissionDto> studentList = jdbcTemplate.query(sql,new StudentsMapper());
+	    return studentList;	    		
+	}
 	
 	
 	
@@ -80,14 +91,15 @@ public class StudentsDaoImpl implements StudentsDao {
 	
 	public void saveStudents(AdmissionDto dto) throws IOException {
 	System.out.println("inside DB method");
-		String sql = "insert into students values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+		String sql = "insert into students values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 
 		Object[] args = { getPK()+1, dto.getName(), dto.getfName(), dto.getfOccupation(), dto.getmName(), dto.getmOccupation(), dto.getContact(), 
 						  dto.getAltContact(), dto.getDob(), dto.getSamagraId(), dto.getAadhar(), dto.getBankName(), dto.getAccNo(), 
 						  dto.getIfsc(), dto.getAddress(), dto.getLastClassAttended(), dto.getCity(), dto.getState(), dto.getZip(), 
 						  dto.getBranch(), dto.getStuClass(), dto.getFees(), dto.getGender(), dto.getCategory(), dto.getAdmissionDate(),
 						  dto.getScholarNumber(), dto.getLastSchoolStudied(), dto.getBirthPlace(), dto.getReligion(), dto.getSession(),
-						  dto.getAadharPhoto(),dto.getStudentPhoto(),dto.getSamagraPhoto(), dto.getCastPhoto(), dto.getTcPhoto(), dto.getMigrationPhoto()};
+						  dto.getAadharPhoto(),dto.getStudentPhoto(),dto.getSamagraPhoto(), dto.getCastPhoto(), dto.getTcPhoto(), dto.getMigrationPhoto(),
+						  dto.getDiscountAmt(),dto.getDiscountReference()};
 				;
 		jdbcTemplate.update(sql, args);
 		System.out.println("inserted");
@@ -163,6 +175,13 @@ public class StudentsDaoImpl implements StudentsDao {
 		return studentList;
 	}
 	
+	@Override
+	public List<AdmissionDto> listdiscountedStudents() {
+		String sql = "SELECT * FROM students where discountAmt>0";
+		List<AdmissionDto> studentList = jdbcTemplate.query(sql, new StudentsMapper());
+		//displayStudent(studentList);
+		return studentList;
+	}
 
 	public Integer remainFeesByScholarNumber(String scholarNumber) {
 		String sql = "SELECT SUM(amount) FROM feestransaction WHERE scholarNumber=?";
