@@ -33,17 +33,5 @@
 <br> 
 <a href="feesReport">Fees Report</a>
 <br> 
-
-<a href="http://localhost:8082/student/allStudents">All Students</a>
-<br> 
-<a href="http://localhost:8082/student/3">Single Student</a>
-<br> 
-<a href="http://localhost:9090/students/deleteStudentById/52" >Delete Student</a>
-<br> 
-
-
-
-
-
 </body>
 </html>

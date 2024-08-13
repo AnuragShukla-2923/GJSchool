@@ -41,6 +41,11 @@ public class StudentsDaoImpl implements StudentsDao {
 		return jdbcTemplate.queryForList(sql,String.class);  
 	}
 	
+	public List<String> getListOfDiscountedScholarNumbers() {
+		String sql = "select scholarNumber from students where discountAmt>0";
+		return jdbcTemplate.queryForList(sql,String.class);  
+	}
+	
 	public List<String> getListOfdiscountedScholarNumbers() {
 		String sql = "select scholarNumber from students where discountAmt>0";
 		return jdbcTemplate.queryForList(sql,String.class);  
@@ -135,6 +140,14 @@ public class StudentsDaoImpl implements StudentsDao {
 		return studentList;
 	}
 	
+	public List<AdmissionDto> searchDiscountedStudentbyScholarNumber( String stuClasses,String searchValue,String branch,String session) {
+		String search = "%"+searchValue+"%";
+		String sql = "select * from students where stuClass=? AND scholarNumber Like ? AND branch=? AND session=? AND discountAmt>0";
+		List<AdmissionDto> studentList = jdbcTemplate.query(sql,new StudentsMapper(),stuClasses,search, branch,session);
+		
+		return studentList;
+	}
+	
 	
 	public List<AdmissionDto> searchStudent( String stuClasses,String branch,String session,int pageid,int totalRecords) {
 		String sql = "select * from students where stuClass=?  AND branch=? AND session=? limit ?,?";
@@ -144,9 +157,24 @@ public class StudentsDaoImpl implements StudentsDao {
 	}
 	
 	
+	public List<AdmissionDto> searchDiscountedStudent( String stuClasses,String branch,String session,int pageid,int totalRecords) {
+		String sql = "select * from students where stuClass=?  AND branch=? AND session=? AND discountAmt>0 limit ?,?";
+		List<AdmissionDto> studentList = jdbcTemplate.query(sql,new StudentsMapper(),stuClasses, branch,session,pageid-1, totalRecords);
+		
+		return studentList;
+	}
+	
+	
 	public List<AdmissionDto> searchStudentbyName(String stuClasses,String searchValue,String branch,String session) {
 		String search = "%"+searchValue+"%";
 		String sql = "select * from students where stuClass=? AND name Like ? AND branch=? AND session=?";
+		List<AdmissionDto> studentList = jdbcTemplate.query(sql,new StudentsMapper(),stuClasses,search, branch,session);
+		return studentList;
+	}
+	
+	public List<AdmissionDto> searchDiscountedStudentbyName(String stuClasses,String searchValue,String branch,String session) {
+		String search = "%"+searchValue+"%";
+		String sql = "select * from students where stuClass=? AND name Like ? AND branch=? AND session=? AND discountAmt>0";
 		List<AdmissionDto> studentList = jdbcTemplate.query(sql,new StudentsMapper(),stuClasses,search, branch,session);
 		return studentList;
 	}
@@ -216,6 +244,10 @@ public class StudentsDaoImpl implements StudentsDao {
 	
 	
 	public int totalFees() {
+		String sql  = "SELECT SUM(fees) FROM students";
+		return  jdbcTemplate.queryForObject(sql, Integer.class);
+	}
+	public int totalDiscountedFees() {
 		String sql  = "SELECT SUM(fees) FROM students";
 		return  jdbcTemplate.queryForObject(sql, Integer.class);
 	}

@@ -61,7 +61,7 @@
 
 	<h3>Discounted Students Details</h3>
 
-		<form action="searchStudents" onsubmit="return validateform()" >
+		<form action="searchDiscountedStudents" onsubmit="return validateform()" >
 			<label> Branch :</label>
 			<select name="branch">
 				<option value="Gyan Jyoti Public School">Gyan Jyoti Public School</option>
